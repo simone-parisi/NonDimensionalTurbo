@@ -196,12 +196,10 @@ class RadialTurbine(_Machine):
         self.data_in={"specific_speed":0.6,
                       "is_scalloped":True,
                       "diffuser_loss_fraction":0.35,
-                      "axial_clearance":0.02,
-                      "radial_clearance":0.02,
+                      "clearance":0.02,
                       "metal_density":7800,
                       "d_eta_other":0.0}
-        self.reference={"axial_clearance":0.02,
-                        "radial_clearance":0.02,
+        self.reference={"clearance":0.02,
                         "Reynolds":352000.0,
                         "K_loweff":0.1}
         self._fluid=None
@@ -266,8 +264,7 @@ class RadialTurbine(_Machine):
             d_eta_scal=-0.03
         else:
             d_eta_scal=0.0
-        d_eta_cl= -1.6*(self.data_in["radial_clearance"]-self.reference["radial_clearance"])
-        d_eta_cl+=-0.15*(self.data_in["axial_clearance"]-self.reference["axial_clearance"])
+        d_eta_cl= -1.15*(self.data_in["clearance"]-self.reference["clearance"])
         #overall efficiency
         eta_rot=eta_base+d_eta_cl+d_eta_scal+self.data_in["d_eta_other"];
         eta_overall=eta_rot/(1+self.data_in["diffuser_loss_fraction"]*k_rot);
